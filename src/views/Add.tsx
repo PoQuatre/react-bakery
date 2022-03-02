@@ -1,12 +1,16 @@
 import { ChangeEvent, Component } from "react";
 
+interface Props {
+  addItem: (name: string, price: number) => void;
+}
+
 interface State {
   name: string;
   price: number;
 }
 
-export class Add extends Component<{}, State> {
-  constructor(props: {}) {
+export class Add extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -23,6 +27,11 @@ export class Add extends Component<{}, State> {
     this.setState({ price: e.target.valueAsNumber });
   };
 
+  onClickAdd = () => {
+    this.props.addItem(this.state.name, this.state.price);
+    this.setState({ name: "", price: 1 });
+  };
+
   render() {
     return (
       <>
@@ -36,7 +45,9 @@ export class Add extends Component<{}, State> {
             value={this.state.name}
             onChange={this.onChangeName}
           />
-          <button className="btn btn-primary">Add</button>
+          <button className="btn btn-primary" onClick={this.onClickAdd}>
+            Add
+          </button>
         </div>
 
         <div>

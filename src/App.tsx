@@ -27,10 +27,14 @@ export default class App extends Component<{}, State> {
     this.setState({ activeTab: tab });
   };
 
+  addItem = (name: string, price: number) => {
+    this.setState({ items: [...this.state.items, { name, price }] });
+  };
+
   renderView = () => {
     switch (this.state.activeTab) {
       case "add":
-        return <Add />;
+        return <Add addItem={this.addItem} />;
       case "list":
         return <List />;
       case "pay":
