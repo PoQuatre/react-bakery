@@ -36,7 +36,7 @@ export default class App extends Component<{}, State> {
       case "add":
         return <Add addItem={this.addItem} />;
       case "list":
-        return <List />;
+        return <List items={this.state.items} />;
       case "pay":
         return <Pay />;
       default:
@@ -49,7 +49,7 @@ export default class App extends Component<{}, State> {
       <div className="container-md py-5">
         <h1 className="text-center mb-4">Bakery</h1>
 
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center gap-2">
           <Button
             isSelected={this.state.activeTab === "add"}
             onClick={() => this.selectTab("add")}
