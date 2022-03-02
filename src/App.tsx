@@ -1,9 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Component } from "react";
-import { Button } from "./components/Button";
-import { Add } from "./views/Add";
-import { List } from "./views/List";
-import { Pay } from "./views/Pay";
+import { Button } from "./components";
+import { Add, List, Pay } from "./views";
 
 type Tab = "add" | "list" | "pay";
 
@@ -45,7 +43,9 @@ export default class App extends Component<{}, State> {
   render() {
     return (
       <div className="container-md py-5">
-        <div>
+        <h1 className="text-center mb-4">Bakery</h1>
+
+        <div className="d-flex justify-content-center">
           <Button
             isSelected={this.state.activeTab === "add"}
             onClick={() => this.selectTab("add")}
