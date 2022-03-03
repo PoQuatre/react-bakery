@@ -38,7 +38,7 @@ export default class App extends Component<{}, State> {
       case "list":
         return <List items={this.state.items} />;
       case "pay":
-        return <Pay />;
+        return <Pay items={this.state.items} />;
       default:
         return <h1>There is no "{this.state.activeTab}" tab</h1>;
     }

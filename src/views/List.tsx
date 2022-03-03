@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { capitalize } from "../utils";
 
 interface Props {
   items: {
@@ -18,8 +19,11 @@ export class List extends Component<Props> {
         ) : (
           <ul className="list-group">
             {this.props.items.map((item) => (
-              <li className="list-group-item d-flex justify-content-between">
-                {item.name}{" "}
+              <li
+                key={item.name}
+                className="list-group-item d-flex justify-content-between"
+              >
+                {capitalize(item.name)}{" "}
                 <span className="badge bg-primary">{item.price}€</span>
               </li>
             ))}
