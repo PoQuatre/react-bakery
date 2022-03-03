@@ -4,12 +4,7 @@ interface Props {
   addItem: (name: string, price: number) => void;
 }
 
-interface State {
-  name: string;
-  price: number;
-}
-
-export class Add extends Component<Props, State> {
+export class Add extends Component<Props, Item> {
   constructor(props: Props) {
     super(props);
 

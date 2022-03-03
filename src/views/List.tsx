@@ -1,11 +1,8 @@
 import { Component } from "react";
-import { capitalize } from "../utils";
+import { capitalize, randomString } from "../utils";
 
 interface Props {
-  items: {
-    name: string;
-    price: number;
-  }[];
+  items: Item[];
 }
 
 export class List extends Component<Props> {
@@ -20,7 +17,7 @@ export class List extends Component<Props> {
           <ul className="list-group">
             {this.props.items.map((item) => (
               <li
-                key={item.name}
+                key={randomString(32)}
                 className="list-group-item d-flex justify-content-between"
               >
                 {capitalize(item.name)}{" "}

@@ -1,18 +1,12 @@
 import { Component } from "react";
-import { Card } from "../components";
+import { Card, CartContent } from "../components";
 
 interface Props {
-  items: {
-    name: string;
-    price: number;
-  }[];
+  items: Item[];
 }
 
 interface State {
-  shoppingCart: {
-    name: string;
-    price: number;
-  }[];
+  shoppingCart: Item[];
   total: number;
   totalTVA: number;
   totalEcoTax: number;
@@ -33,7 +27,19 @@ export class Pay extends Component<Props, State> {
   }
 
   handleSelect = (name: string, price: number) => {
-    console.log(name, price);
+    const shoppingCart = [...this.state.shoppingCart, { name, price }];
+    const total = shoppingCart.reduce((total, item) => total + item.price, 0);
+    const totalEcoTax = shoppingCart.length * 0.03;
+    const totalTVA = total / 5;
+    const totalTTC = total + totalEcoTax + totalTVA;
+
+    this.setState({
+      shoppingCart,
+      total,
+      totalEcoTax,
+      totalTVA,
+      totalTTC,
+    });
   };
 
   render() {
@@ -45,7 +51,9 @@ export class Pay extends Component<Props, State> {
           <h3>No items are available</h3>
         ) : (
           <>
-            <div className="text-end">
+            <CartContent items={this.state.shoppingCart} />
+
+            <div className="text-end mb-5">
               <p className="mb-1">SubTotal: {this.state.total.toFixed(2)} €</p>
               <p className="mb-1">VAT: {this.state.totalTVA.toFixed(2)} €</p>
               <p className="mb-2">
@@ -56,7 +64,7 @@ export class Pay extends Component<Props, State> {
 
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mx-auto g-2">
               {this.props.items.map((item) => (
-                <Card key={item.name} {...item} />
+                <Card key={item.name} {...item} onClick={this.handleSelect} />
               ))}
             </div>
           </>
